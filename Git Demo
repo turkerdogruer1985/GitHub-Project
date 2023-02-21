@@ -1,0 +1,139 @@
+package gitdemo;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+
+import org.openqa.selenium.WebDriver;
+
+import org.openqa.selenium.WebElement;
+
+import org.openqa.selenium.chrome.ChromeDriver;
+
+import org.openqa.selenium.interactions.Actions;
+
+import org.openqa.selenium.support.ui.Select;
+
+
+
+public class CreateGithubTask {
+
+public static void main(String[] args) throws InterruptedException {
+
+System.setProperty("webdriver.chrome.driver", "/Users/turkerdogruer/eclipse-workspace/Test/chromedriver");
+
+WebDriver driver = new ChromeDriver();
+
+driver.manage().window().maximize();
+
+driver.get("https://github.com/login");
+
+WebElement wrongUsername = driver.findElement(By.xpath("//input[@id='login_field']"));
+
+wrongUsername.sendKeys("ABCD");
+
+WebElement wrongPassword = driver.findElement(By.xpath("//input[@id='password']"));
+
+wrongPassword.sendKeys("1231Sfw21@");
+
+WebElement signInFail = driver.findElement(By.xpath("//*[@id=\"login\"]/div[4]/form/div/input[11]"));
+
+signInFail.click();
+
+WebElement correctUsernameS = driver.findElement(By.xpath("//input[@id='login_field']"));
+
+correctUsernameS.clear();
+
+correctUsernameS.sendKeys("turkerdogruer1985");
+
+WebElement correctPassword = driver.findElement(By.xpath("//input[@id='password']"));
+
+correctPassword.clear();
+
+correctPassword.sendKeys("123Salla321@");
+
+WebElement signInSuccsessfully = driver.findElement(By.xpath("//*[@id=\"login\"]/div[4]/form/div/input[11]"));
+
+signInSuccsessfully.click();
+
+WebElement profileMenu = driver.findElement(By.xpath("//header/div[7]/details[1]/summary[1]/img[1]"));
+
+profileMenu.click();
+
+Thread.sleep(2000);
+
+WebElement settingsOption = driver
+
+.findElement(By.xpath("//a[@data-ga-click='Header, go to settings, icon:settings']"));
+
+settingsOption.click();
+
+Thread.sleep(2000);
+
+Actions actions = new Actions(driver);
+
+actions.scrollByAmount(0, 600).perform();
+
+List<WebElement> e = driver.findElements(By.className("ActionListItem-label"));
+
+for (WebElement el : e) {
+
+String developerSettings = el.getText();
+
+if (developerSettings.equalsIgnoreCase("Developer settings")) {
+
+el.click();
+
+break;
+
+}
+}
+
+Thread.sleep(2000);
+
+WebElement personalAccessToken = driver.findElement(By.id("personal-access-tokens-menu-item"));
+
+personalAccessToken.click();
+
+WebElement classicToken = driver.findElement(By.xpath("//span[contains(text(),'Tokens (classic)')]"));
+
+classicToken.click();
+
+Thread.sleep(2000);
+
+WebElement GenPerAccTok = driver.findElement(By.linkText("Generate a personal access token"));
+
+GenPerAccTok.click();
+
+Thread.sleep(2000);
+
+WebElement note = driver.findElement(By.id("oauth_access_description"));
+
+note.sendKeys("QA automations");
+
+WebElement experationDate = driver.findElement(By.xpath("//select[@id='oauth_access_default_expires_at']"));
+
+Select date = new Select(experationDate);
+
+date.selectByValue("7");
+
+WebElement workflow = driver.findElement(By.xpath("//input[@value='workflow']"));
+
+workflow.click();
+
+WebElement user = driver.findElement(By.xpath("//input[@value='user']"));
+
+user.click();
+
+actions.scrollByAmount(0, 1500).perform();
+
+WebElement generateToken = driver.findElement(By.xpath("//button[contains(text(),'Generate token')]"));
+
+generateToken.click();
+
+driver.quit();
+
+}
+
+}
+
