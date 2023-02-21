@@ -62,9 +62,7 @@ profileMenu.click();
 
 Thread.sleep(2000);
 
-WebElement settingsOption = driver
-
-.findElement(By.xpath("//a[@data-ga-click='Header, go to settings, icon:settings']"));
+WebElement settingsOption = driver.findElement(By.xpath("//a[@data-ga-click='Header, go to settings, icon:settings']"));
 
 settingsOption.click();
 
@@ -86,7 +84,7 @@ el.click();
 
 break;
 
-}
+   }
 }
 
 Thread.sleep(2000);
@@ -133,7 +131,7 @@ generateToken.click();
 
 driver.quit();
 
-}
+  }
 
 }
 
