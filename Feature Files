@@ -1,0 +1,26 @@
+Feature: Check git token functionality
+
+Scenario: User generates a new personal access token on GitHub
+
+Given User on the GitHub login page
+When User enters my username and password
+And User clicks on the "Sign in" button
+Then User should be redirected to the GitHub dashboard
+
+Given User on the GitHub dashboard
+When User clicks on my profile picture in the top right corner
+And User selects "Settings" from the dropdown menu
+Then User should be redirected to the GitHub settings page
+
+Given User on the GitHub settings page
+When User selects "Developer settings" from the left sidebar
+Then User selects "Personal access tokens"
+And User cliks on the Tokes link
+And User clicks on the "Generate new token" button
+Then User should be presented with the token creation form
+
+Given User on the token creation form
+When User enters a description for the token
+And User selects the appropriate scopes for the token
+And User clicks on the "Generate token" button
+Then User should be presented with new personal access token
